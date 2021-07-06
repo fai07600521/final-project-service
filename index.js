@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const mysql = require('mysql2/promise');
 const cors = require('cors')
-const port = 3300
+const port = 3000
 const bluebird = require('bluebird');
 
 app.use(cors())
@@ -23,5 +23,3 @@ app.get('/', async function (req, res) {
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
-
-0
