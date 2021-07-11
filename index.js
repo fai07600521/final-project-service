@@ -14,6 +14,7 @@ app.get('/', async function (req, res) {
     user: config.mysql.user, 
     password: config.mysql.password,
     database: config.mysql.database, 
+    port: config.mysql.port,
     Promise: bluebird
   })
   const { limit, offset, type } = req.query
