@@ -1,4 +1,4 @@
-FROM node:v14.15.0 as img-service
+FROM node:14.15.0 as img-service
 WORKDIR /app
 COPY . /app
 RUN npm install
