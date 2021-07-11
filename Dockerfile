@@ -1,9 +1,8 @@
-FROM node:boron as img-service
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-COPY package.json /usr/src/app/
+FROM node:v14.15.0 as img-service
+WORKDIR /app
+COPY . /app
 RUN npm install
-COPY . /usr/src/app
+COPY . /app
 EXPOSE 3000
 CMD ["npm","start"]
 
