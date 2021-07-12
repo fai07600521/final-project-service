@@ -20,7 +20,8 @@ app.get('/', async function (req, res) {
     })
     const { limit, offset, type } = req.query
     if(limit && offset && type){
-      const [rows, fields] = await connection.execute(`SELECT * FROM ${type} limit ${limit} offset ${offset}`);
+      const [rows, fields] = await connection.execute(`SELECT * FROM ${type} limit ${limit} offset ${offset}`)
+      connection.end()
       res.send(rows)
     }else{
       res.status(404).send()
@@ -28,8 +29,6 @@ app.get('/', async function (req, res) {
   }catch(e){
     console.log(err.message)
     res.status(404).send()
-  }finally{
-    connection.end()
   }
 })
 
