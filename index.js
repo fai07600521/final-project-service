@@ -19,7 +19,7 @@ app.get('/', async function (req, res) {
       Promise: bluebird
     })
     const { limit, type } = req.query
-    const offset = Math.random() * (1000 - 0) + 0
+    const offset = Math.Int(Math.random() * (1000 - 0) + 0)
     if(limit && offset && type){
       const [rows, fields] = await connection.execute(`SELECT * FROM ${type} limit ${limit} offset ${offset}`)
       connection.end()
