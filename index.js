@@ -18,7 +18,8 @@ app.get('/', async function (req, res) {
       port: config.mysql.port,
       Promise: bluebird
     })
-    const { limit, offset, type } = req.query
+    const { limit, type } = req.query
+    const offset = Math.random() * (1000 - 0) + 0
     if(limit && offset && type){
       const [rows, fields] = await connection.execute(`SELECT * FROM ${type} limit ${limit} offset ${offset}`)
       connection.end()
@@ -33,5 +34,6 @@ app.get('/', async function (req, res) {
 })
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log(`Example app listening at http://${config.mysql.host}:${port}`)
 })
+
