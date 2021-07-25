@@ -27,7 +27,7 @@ app.get('/', async function (req, res) {
     }else{
       res.status(404).send()
     }
-  }catch(e){
+  }catch(err){
     console.log(err.message)
     res.status(404).send()
   }
