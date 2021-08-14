@@ -1,3 +1,5 @@
+
+
 const express = require('express')
 const app = express()
 const mysql = require('mysql2/promise');
@@ -6,8 +8,11 @@ const config = require('./config')
 const port = 3000
 const bluebird = require('bluebird');
 
+
+
+
 app.use(cors())
-// respond with "hello world" when a GET request is made to the homepage
+//respond with "hello world" when a GET request is made to the homepage
 app.get('/', async function (req, res) {
   try{
     const connection = await mysql.createConnection({
@@ -18,9 +23,10 @@ app.get('/', async function (req, res) {
       port: config.mysql.port,
       Promise: bluebird
     })
-    const type = "classy"  
-    if (type){
-      const [rows, fields] = await connection.execute(`SELECT * FROM ${type}`)
+    const { limit, type } = req.query
+    const offset = Math.floor(Math.random() * (1000 - 0) + 0)
+    if(limit && offset && type){
+      const [rows, fields] = await connection.execute(`SELECT * FROM ${type} limit ${limit} offset ${offset}`)
       connection.end()
       res.send(rows)
     }else{
@@ -35,4 +41,3 @@ app.get('/', async function (req, res) {
 app.listen(port, () => {
   console.log(`Example app listening at http://${config.mysql.host}:${port}`)
 })
-
