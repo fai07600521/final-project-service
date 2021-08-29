@@ -7,7 +7,7 @@ if(environment === "prod"){
     mysql: {
       host:'103.74.253.121', 
       user: 'root',
-      port: 3306,
+      port: 3000,
       password: '123456',
       database: 'fask'
     }
