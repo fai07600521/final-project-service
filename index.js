@@ -25,7 +25,7 @@ app.get('/', async function (req, res) {
     })
     const { limit, type } = req.query
     if(limit && type){
-      const [rows, fields] = await connection.execute(`SELECT * FROM ${type} ORDER BY RAND() limit ${limit}`)
+      const [rows, fields] = await connection.execute(`SELECT * FROM ${type}`)
       connection.end()
       res.send(rows)
     }else{
