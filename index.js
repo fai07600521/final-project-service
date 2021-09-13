@@ -7,6 +7,7 @@ const cors = require('cors')
 const config = require('./config')
 const port = 3000
 const bluebird = require('bluebird');
+const spawn = require("child_process").spawn;
 
 
 
@@ -37,6 +38,25 @@ app.get('/', async function (req, res) {
   }
 })
 
+
+
+app.post('/', async function (req, res) {
+  try{
+    const connection = await mysql.createConnection({
+      host: config.mysql.host, 
+      user: config.mysql.user, 
+      password: config.mysql.password,
+      database: config.mysql.database, 
+      port: config.mysql.port,
+      Promise: bluebird
+    })
+    const { type } = req.query
+    const pythonProcess = spawn('python' , ["generate.py" ,type])
+    pythonProcess.stdout.on('data', (data) => {
+      console.log(data.toString());
+    });
+})
+ 
 app.listen(port, () => {
   console.log(`Example app listening at http://${config.mysql.host}:${port}`)
 })
