@@ -55,6 +55,10 @@ app.post('/', async function (req, res) {
     pythonProcess.stdout.on('data', (data) => {
       console.log(data.toString());
     });
+  }catch(err){
+    console.log(err.message)
+    res.status(404).send()
+  }
 })
  
 app.listen(port, () => {
